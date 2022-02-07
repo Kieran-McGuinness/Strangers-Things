@@ -1,0 +1,107 @@
+* {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+html{
+  background-color: #f6c28b;
+}
+.category{
+  font-weight: bold;
+}
+.app{
+  background-color: #f6c28b;
+}
+#navigation{
+display: flex;
+flex-direction: row-reverse;
+background-color: #5296a5;
+}
+#titlelink{
+text-decoration: none;
+display:flex;
+margin-right: auto;
+padding-right: 15px;
+font-size: 2.5em;
+}
+#loggedinlink, #postslink, #profilelink{
+  text-decoration: none;
+}
+#login, #register{
+display:flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-between;
+}
+#loginform, #registerform, #searchform, #loggedin{
+display:flex;
+flex-direction: column;
+align-items: center;
+}
+#createpostform{
+display:flex;
+flex-direction: column;
+}
+#submitcreatepostbtn{
+  align-items: center;
+}
+.username{
+background-color: aquamarine;
+}
+li{
+list-style-type: none;
+}
+#postsandcreate{
+  display:flex;
+  flex-direction: row-reverse;
+}
+#poststitle, #createposttitle, #profiletitle{
+  text-align:center;
+}
+.profilemessages:last-child{
+border-bottom: none;
+}
+.profileposts{
+  padding-bottom: 10px;
+}
+#profile, #posts, #login,#register, #loggedin{
+  background-color: #f6c28b;
+}
+#profileheader{
+font-size: 2rem;
+}
+#posts{
+flex:1;
+display: flex;
+flex-direction: column;
+}
+#createpost{
+  position:fixed;
+flex:0;
+display: flex;
+min-width: 22%;
+flex-direction: column;
+background-color: #82ddf0;
+}
+#viewindividualpost, #viewallposts{
+  text-decoration: none;
+}
+#float{
+z-index: 1;
+color: white;
+background-color: green;
+border:3px solid #82ddf0;
+text-align: center;
+width:300px;
+position:fixed;
+margin:5% auto;
+padding:0;
+bottom:60%;
+left: 0;
+right:0;
+}
+.hidden{
+display:none !important;
+}

@@ -1,0 +1,40 @@
+* {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  #postsandcreate{
+    display:flex;
+    flex-direction: row-reverse;
+  }
+#posts{
+  flex:1;
+  display: flex;
+background-color: bisque;
+flex-direction: column;
+}
+#createpost{
+  flex:0;
+  display: flex;
+  flex-direction: column;
+  background-color: aquamarine;
+  }
+.indvPosts{
+background-color: aliceblue;
+}
+#float{
+  z-index: 1;
+  border:3px solid black;
+  text-align: center;
+  width:300px;
+  position:fixed;
+  margin:5% auto;
+  padding:0;
+  bottom:10%;
+ left: 0;
+ right:0;
+}
+.hidden{
+  display:none !important;
+}
