@@ -8,6 +8,7 @@ const CreateMessage = (props) => {
     const postId = props.postId
     const [message, setMessage] = useState("")
     const handleMessageSubmit = async (event) => {
+        // handles submitting a message, checks if message field is blank, if so will return an error message and not run command.
         event.preventDefault()
         if (message === "") {
             document.getElementById("float").className = "visible";
@@ -18,6 +19,7 @@ const CreateMessage = (props) => {
             setMessage("")
             setClicked(false)
         } else {
+            // if message is not blank will put it into an object and send it along with method, authentication token and url to fetch command
             let messageInfo = {
                 message: {
                     content: `${message}`
@@ -29,26 +31,32 @@ const CreateMessage = (props) => {
             setMessage("")
             setClicked(false)
             if (data.success) {
+                // if fetch command is succesful will create a notifiction on the page
                 document.getElementById("float").className = "visible"
                 document.getElementById("float").innerText = "Message Sent"
                 setTimeout(function () {
                     document.getElementById("float").className = "hidden";
-                }, 5000)
+                }, 3500)
             }
         }
     }
 
     const handleMessageChange = (event) => {
+        // handles updating message value as it is entered
         setMessage(event.target.value)
     }
+    // tracks wheter send message button is clicked
     const [clicked, setClicked] = useState(false)
+
     const displayMessageForm = () => {
+        // changes clicked state to true when button is clicked
         // console.log("clicked")
         setClicked(true)
 
 
     }
     return (
+        // generates send message button if button has not been clicked, when button is clicked generates the send message form and button to trigger api fetch command
         clicked ?
             <Box component="form" sx={{
                 '& .MuiTextField-root': { mt: .5, width: '25ch' }

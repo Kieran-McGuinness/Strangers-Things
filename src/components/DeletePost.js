@@ -12,13 +12,15 @@ const DeletePost = (props) => {
     const loadedPosts = props.loadedPosts
     const setPostsToDisplay = props.setPostsToDisplay
     const handleDelete = async () => {
+        // redirects to posts page if post is succesfully deleted and generates a success message
         // console.log(postId)
-        history.push("/posts")
+
         const data = await callApi({ url: `/posts/${postId}`, method: "delete", token: localStorage.getItem("myToken") })
         if (data.success) {
             const newPosts = loadedPosts.filter((post) => post._id !== postId)
             setLoadedPosts(newPosts)
             setPostsToDisplay(newPosts)
+            history.push("/posts")
             document.getElementsByClassName("hidden")[0].className = "visible"
             document.getElementById("float").innerText = `Post has been deleted`
             setTimeout(function () {

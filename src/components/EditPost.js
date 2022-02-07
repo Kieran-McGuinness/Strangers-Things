@@ -7,6 +7,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import { buttonBaseClasses } from "@mui/material";
 
 
 const EditPost = (props) => {
@@ -20,6 +21,7 @@ const EditPost = (props) => {
     const [title, setTitle] = useState("")
     const [willDeliver, setWillDeliver] = useState(false)
     const clickButton = (event) => {
+        // sets form values to those of post that is being edited
         setDescription(indPost[0].description)
         setLocation(indPost[0].location)
         setPrice(indPost[0].price)
@@ -29,6 +31,7 @@ const EditPost = (props) => {
     }
 
     const handleSubmitEdit = async (event) => {
+        // creates object with edited posts and sends it with key, url and method to api
         event.preventDefault()
         let editedInfo = {
             post: {
@@ -41,6 +44,7 @@ const EditPost = (props) => {
         }
         const results = await callApi({ url: `/posts/${id}`, method: "patch", token: localStorage.getItem("myToken"), body: editedInfo })
         if (results.success) {
+            // if api fetch is succesfull displays a success message and redirects to posts pages
             document.getElementsByClassName("hidden")[0].className = "visible"
             document.getElementById("float").innerText = "Post has been updated"
             setTimeout(function () {
@@ -51,6 +55,8 @@ const EditPost = (props) => {
         // console.log(results)
         history.push("/posts")
     }
+
+    // functions that handle form value changes
     const handleDescriptionChange = (event) => {
         setDescription(event.target.value)
     }
@@ -68,6 +74,7 @@ const EditPost = (props) => {
     }
 
     return (
+        // generates an edit post button, once clicked generates the edit post form and submit button
         editClicked ?
             <Box component="form" noValidate autoComplete="off" id="editpost" onSubmit={handleSubmitEdit}>
                 <TextField
@@ -112,24 +119,6 @@ const EditPost = (props) => {
 
     )
 }
-
-
-{/* <form onSubmit={handleSubmitEdit}>
-            <label htmlFor="description">Description:</label>
-            <input type="text" name="description" value = {description} onChange={handleDescriptionChange}/>
-             <label htmlFor="location">Location:</label>
-             <input type="text" name="location" value = {location} onChange={handleLocationChange}/>
-             <label htmlFor="price">Price:</label>
-             <input type="text" name="price" value = {price} onChange={handlePriceChange}/>
-             <label htmlFor="title">Title:</label>
-             <input type="text" name="title" value = {title} onChange={handleTitleChange}/>
-             <label htmlFor="willdeliver">Will Deliver</label>
-             <input type="checkbox" name="willdeliver" value = {willDeliver} onChange={handleWillDeliverChange}/>
-             <button type="submit">Submit Post</button>
-        </form> */}
-
-
-
 
 
 export default EditPost

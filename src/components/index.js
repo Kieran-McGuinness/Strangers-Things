@@ -9,3 +9,5 @@ export { default as CreateMessage } from "./CreateMessage"
 export { default as Searchb } from "./Search"
 export { default as IndividualPost } from "./IndividualPost"
 export { default as ViewPost } from "./ViewPost"
+
+// exports the components so they can be imported in index

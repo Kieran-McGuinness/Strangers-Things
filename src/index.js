@@ -30,6 +30,7 @@ const App = () => {
   const [authToken, setAuthToken] = useState(true)
   const [currentAuthToken, setCurrentAuthToken] = useState("")
   useEffect(() => {
+    // checks if authentication token is in local storage
     localStorage.getItem("myToken")
       ?
       setCurrentAuthToken(localStorage.getItem("myToken"))
@@ -56,6 +57,7 @@ const App = () => {
                   </Tooltip>
                 </Link>
                 {authToken ?
+                  // if authentication token exists displays the profile button
                   <Link to="/profile" id="profilelink">
                     <Tooltip title="Profile">
                       <IconButton aria-label="profile">
@@ -65,6 +67,7 @@ const App = () => {
                   </Link>
                   :
                   <></>}
+                {/* displays logout icon and text if key is present in local storage, if no key is stored displays the login icon and text */}
                 <Link to="/login" id="loggedinlink">
                   {authToken ?
                     <Tooltip title="Log Out">

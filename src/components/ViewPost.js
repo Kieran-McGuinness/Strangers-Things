@@ -17,6 +17,7 @@ const ViewPost = (props) => {
   const indPost = loadedPosts.filter(post => postView(post, id))
   // console.log(loadedPosts)
   return (
+    // displays the information from the individual post the authenticated user clicked
     indPost.length ? <div key={indPost[0]._id} id='profileindvpostspage'>
       <div className="profileindvposts">
         <h2>{indPost[0].title}</h2>
@@ -51,6 +52,7 @@ const ViewPost = (props) => {
         }
       })()}
       <div id="indvposticons">
+        {/* creates the edit and delete buttons, checks again that the current user if the author, if not the buttons will not show */}
         {indPost[0].isAuthor ? <EditPost id={id} indPost={indPost} /> : <p></p>}
         {indPost[0].isAuthor ? <DeletePost postId={indPost[0]._id} setLoadedPosts={setLoadedPosts}
           loadedPosts={loadedPosts} setPostsToDisplay={setPostsToDisplay} /> : <></>}
@@ -62,6 +64,7 @@ const ViewPost = (props) => {
       :
       <div>
         <h2>Post Cannot Be Loaded</h2>
+        {/* error message incase page is arrived at without a proper post id */}
         <Link id="viewallposts" to="/posts">
           <Button size="small" variant="contained" color="secondary" type="submit">Return to All Posts</Button>
         </Link>

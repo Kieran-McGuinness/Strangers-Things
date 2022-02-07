@@ -6,6 +6,7 @@ const Profile = (props) => {
   const [myProfile, setMyProfile] = useState([])
 
   useEffect(() => {
+    // calls the api for the current authenticated users posts and messages
     callApi({ url: "/users/me", token: localStorage.getItem("myToken") }).then(result => {
       setMyProfile(result.data)
       // console.log(result.data)
@@ -15,6 +16,7 @@ const Profile = (props) => {
   }, []);
   return (
     <div id="profile">
+      {/* maps through the current users information putting each active post then its messages */}
       <h1 id="profiletitle">Profile</h1>
       <div>
         <h3 id="profileheader">My Posts</h3>
@@ -33,6 +35,7 @@ const Profile = (props) => {
                 </div>)}
             </div> :
             <React.Fragment key={post._id + .5}></React.Fragment>) :
+          // if user has no posts 
           <p>no posts</p>}
       </div>
     </div>

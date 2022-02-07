@@ -9,6 +9,7 @@ const Search = (props) => {
     const loadedPosts = props.loadedPosts
     const [searchTerm, setSearchTerm] = useState("")
     function postMatches(post, term) {
+        // checks if description, title, location or authors names from all posts contain the search term
         if (post.description.toLowerCase().includes(term.toLowerCase())
             ||
             post.title.toLowerCase().includes(term.toLowerCase())
@@ -25,6 +26,7 @@ const Search = (props) => {
     }
 
     const handleSubmitSearch = (event) => {
+        // filters only for posts that contain the searched word and displays them instead of all posts
         event.preventDefault()
         const filteredPosts = loadedPosts.filter(post => postMatches(post, searchTerm));
         setPostsToDisplay(searchTerm.length ? filteredPosts : loadedPosts)

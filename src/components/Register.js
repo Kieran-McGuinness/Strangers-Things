@@ -1,16 +1,19 @@
 import { useState } from "react"
-import { API, callApi, cohortName, registerNew } from "../api"
+import { callApi } from "../api"
 import { Box } from "@mui/system"
 import { TextField } from "@mui/material"
 import { Button } from "@mui/material"
 import { useEffect } from "react"
+import { useHistory } from "react-router-dom"
 
 const Register = (props) => {
     const [passwordMatch, setPasswordMatch] = useState(false)
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
+    let history = useHistory()
     useEffect(() => {
+        // checks if passwords match, if not sets match state to false which shows an error
         if (password === confirmPassword) {
             setPasswordMatch(false)
         } else if (password !== confirmPassword) {
@@ -19,6 +22,7 @@ const Register = (props) => {
     }, [confirmPassword, password])
 
     const handleSubmit = async (event) => {
+        // puts password and usernmae into an object to be sent to api
         event.preventDefault()
         let regInfo = {
             user: {
@@ -32,23 +36,26 @@ const Register = (props) => {
         // console.log(regInfo)
 
         if (!passwordMatch) {
+            // if passwords match sends the information to api and on success generates a message and redirects to login page
             const results = await callApi({ url: "/users/register", method: "POST", body: regInfo })
             setPassword("")
             setUsername("")
             setConfirmPassword("")
             if (results.success) {
+                history.push("/login");
                 document.getElementsByClassName("hidden")[0].className = "visible"
                 document.getElementById("float").innerText = `${results.data.message} Please Login to Continue`
                 setTimeout(function () {
                     document.getElementById("float").className = "hidden";
-                }, 10000)
+                }, 4000)
             }
         } else {
+            // if passwords do not match creates another notification that passwords must match
             document.getElementsByClassName("hidden")[0].className = "visible"
             document.getElementById("float").innerText = `Passwords Must Match`
             setTimeout(function () {
                 document.getElementById("float").className = "hidden";
-            }, 5000)
+            }, 3000)
 
         }
     }

@@ -5,8 +5,11 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import { experimentalStyled } from "@mui/material";
+import { formatMuiErrorMessage } from "@mui/utils";
 
 const CreatePost = (props) => {
+    // component for creating a new post. variables that handle the different form fields and props for generating the page with the new post
     const loadedPosts = props.loadedPosts
     const setLoadedPosts = props.setLoadedPosts
     const setPostsToDisplay = props.setPostsToDisplay
@@ -17,10 +20,12 @@ const CreatePost = (props) => {
     const [willDeliver, setWillDeliver] = useState(false)
 
     const goToTop = () => {
+        // function that handles the top of page button
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
     }
     const handleSubmitNewPost = async (event) => {
+        // checks that none of the form fields are empty, then adds them to a post Object and sends it along with the method, key and url to the api fetch function. sets form fields and use states back to blank
         if (title && description && location && price && title) {
             event.preventDefault()
             let postInfo = {
@@ -39,6 +44,7 @@ const CreatePost = (props) => {
             setWillDeliver(false)
             const data = await callApi({ url: "/posts", method: "POST", token: localStorage.getItem("myToken"), body: postInfo })
             if (data.success) {
+                // if api fetch is succefull places a notification on page, if unsuccesfull will display an error
                 document.getElementsByClassName("hidden")[0].className = "visible"
                 document.getElementById("float").innerText = `Post has been created`
                 setTimeout(function () {
@@ -51,13 +57,14 @@ const CreatePost = (props) => {
                     document.getElementById("float").className = "hidden";
                 }, 3500)
             }
+            // regenerates the page with the new post added
             setPostsToDisplay([data.data.post, ...loadedPosts])
             setLoadedPosts([data.data.post, ...loadedPosts])
         } else {
             event.preventDefault()
         }
     }
-
+    // functions that handle the form fields being filled
     const handleDescriptionChange = (event) => {
         setDescription(event.target.value)
     }
@@ -77,6 +84,7 @@ const CreatePost = (props) => {
 
 
     return (
+        // checks if user has a token, if so generates the create post form, if no token then nothing is generated
         localStorage.getItem("myToken") ?
             <aside id="createpost">
                 <h1 id="createposttitle">Create Post</h1>
